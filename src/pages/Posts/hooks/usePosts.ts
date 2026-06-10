@@ -70,7 +70,7 @@ export const usePosts = () => {
     const createPostAsync = async (body: PostCreateDto) => {
         try {
             const resp = await postService.createPostAsync(body);
-            const postCreated = postMapper.mapPost(resp.data);
+            const postCreated = postMapper.mapPost(resp.data, {});
 
             setPosts(prev => [postCreated, ...prev])
         } catch (error) {
