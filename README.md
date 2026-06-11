@@ -1,73 +1,153 @@
-# React + TypeScript + Vite
+# Prueba Técnica Frontend - Posts App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación de gestión de posts construida con React, TypeScript y Vite.
 
-Currently, two official plugins are available:
+## Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Aplicación frontend para gestionar posts utilizando la API REST de JSONPlaceholder. Permite listar, crear, editar, eliminar y visualizar posts con sus respectivos comentarios y autores.
 
-## React Compiler
+## Tecnologías
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** 19.2.6 - Framework UI
+- **TypeScript** 6.0.2 - Lenguaje tipado
+- **Vite** 8.0.12 - Herramienta de build y desarrollo
+- **TailwindCSS** 4.3.0 - Framework de estilos
+- **React Router** 7.17.0 - Navegación
+- **React Hook Form** 7.78.0 - Gestión de formularios
+- **Yup** 1.7.1 - Validación de esquemas
+- **Axios** 1.17.0 - Cliente HTTP
+- **React Toastify** 11.1.0 - Notificaciones
+- **Vitest** 4.1.8 - Testing unitario
 
-## Expanding the ESLint configuration
+## Requisitos Previos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js 18+ (recomendado 20+)
+- npm, pnpm o yarn como gestor de paquetes
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Instalación
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+```bash
+# Clonar el repositorio
+git clone <url-del-repositorio>
+cd prueba-tecnica-frontend
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Instalar dependencias con pnpm (recomendado)
+pnpm install
+
+# O con npm
+npm install
+
+# O con yarn
+yarn install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts Disponibles
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Comando | Descripción |
+|---------|-------------|
+| `pnpm dev` | Inicia el servidor de desarrollo en `http://localhost:5173` |
+| `pnpm build` | Compila el proyecto para producción |
+| `pnpm preview` | Previsualiza el build de producción |
+| `pnpm lint` | Ejecuta ESLint para verificar código |
+| `pnpm test` | Ejecuta los tests en modo watch |
+| `pnpm test:run` | Ejecuta los tests una sola vez |
+| `pnpm test:ui` | Abre la interfaz gráfica de Vitest |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Estructura del Proyecto
+
 ```
+src/
+├── api/                    # Configuración de Axios
+├── assets/                 # Recursos estáticos
+├── context/
+│   └── posts/              # Context y Provider para posts
+├── layouts/
+│   └── DashboardLayout.tsx  # Layout principal con sidebar
+├── pages/
+│   ├── Post/               # Página de detalle de post
+│   └── Posts/              # Páginas de lista de posts
+│       ├── components/     # Componentes de posts
+│       ├── hooks/          # Hooks personalizados
+│       └── schemas/       # Esquemas de validación Yup
+├── router/
+│   └── AppRouter.tsx       # Configuración de rutas
+├── services/
+│   ├── dtos/               # Data Transfer Objects
+│   └── mappers/            # Mapeadores de datos
+├── shared/
+│   ├── components/         # Componentes reutilizables
+│   │   ├── Buttons/       # Button, FAB
+│   │   └── Sidebar/       # Sidebar
+│   ├── hooks/              # Hooks compartidos
+│   └── interfaces/         # Interfaces TypeScript
+└── test/                   # Configuración de tests
+```
+
+## Tests Unitarios
+
+El proyecto incluye tests unitarios con Vitest y Testing Library para los siguientes componentes:
+
+- `Button` - Botón con variantes y estados
+- `FAB` - Floating Action Button
+- `Modal` - Modal reutilizable
+- `TextField` - Campo de texto/textarea
+- `SpinnerLoading` - Spinner de carga
+- `PostError` - Componente de error
+- `CreatePostModal` - Modal para crear posts
+- `EditPostModal` - Modal para editar posts
+- `DeletePostModal` - Modal para eliminar posts
+- `ListPosts` - Lista de posts
+
+### Ejecutar Tests
+
+```bash
+# Modo watch (recomendado durante desarrollo)
+pnpm test
+
+# Ejecutar una sola vez
+pnpm test:run
+
+# Abrir interfaz gráfica
+pnpm test:ui
+```
+
+### Estructura de Tests
+
+Los archivos de test siguen la convención `*.test.tsx` y están ubicados en `src/test/` manteniendo la misma estructura que los componentes originales:
+
+```
+src/test/
+├── shared/components/
+│   ├── Buttons/
+│   │   ├── Button.test.tsx
+│   │   └── FAB.test.tsx
+│   ├── Modal.test.tsx
+│   ├── TextField.test.tsx
+│   └── SpinnerLoading.test.tsx
+└── pages/Posts/components/
+    ├── PostError.test.tsx
+    ├── CreatePostModal.test.tsx
+    ├── EditPostModal.test.tsx
+    ├── DeletePostModal.test.tsx
+    └── ListPosts.test.tsx
+```
+
+## API Externa
+
+El proyecto utiliza [JSONPlaceholder Typicode](https://jsonplaceholder.typicode.com) como API REST fake:
+
+- `GET /posts` - Listar posts
+- `GET /posts/:id` - Detalle de post
+- `GET /posts/:id/comments` - Comentarios de un post
+- `GET /users/:id` - Datos del autor
+- `POST /posts` - Crear post
+- `PATCH /posts/:id` - Actualizar post
+- `DELETE /posts/:id` - Eliminar post
+
+## Variables de Entorno
+
+No requiere variables de entorno. La API está configurada directamente en `src/api/apiConfig.ts`.
+
+## Licencia
+
+Privado - Uso técnico
